@@ -41,6 +41,8 @@ body {
   background-size: 430% 100% !important;
   animation: sprite-rarity-special-anim 12s linear infinite !important;
   font-weight: 800;
+  will-change: background-position;
+  transform: translateZ(0);
 }
 
 /* Sprite Theme Gradients from Fortnite.gg */
@@ -92,10 +94,12 @@ body {
 .sprite-art-img {
   filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.45));
   transition: filter 0.32s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform, filter;
+  transform: translateZ(0);
 }
 
 .group:hover .sprite-art-img {
   filter: brightness(1.25) drop-shadow(0 14px 16px rgba(0, 0, 0, 0.6));
-  transform: translateY(-4px) scale(1.04);
+  transform: translateY(-4px) scale(1.04) translateZ(0);
 }
 

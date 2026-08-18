@@ -15,6 +15,7 @@ export interface MergedSpriteComparison {
   spriteB?: SpriteItem;
   isModifiedA?: boolean;
   isModifiedB?: boolean;
+  searchString?: string;
 }
 
 interface SpriteGridProps {

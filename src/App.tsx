@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useMemo, useEffect, useRef } from 'react';
+import React, { useState, useMemo, useEffect, useRef, useDeferredValue } from 'react';
 import { UserProfile, ComparisonMode, OwnershipStatus, SpriteChangeRecord } from './types';
 import { Navbar } from './components/Navbar';
 import { ProfileComparisonHeader } from './components/ProfileComparisonHeader';
@@ -37,6 +37,7 @@ export default function App() {
   // Default view is now "Full inventory matrix" ('all_matrix')
   const [activeMode, setActiveMode] = useState<ComparisonMode>('all_matrix');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const deferredSearchQuery = useDeferredValue(searchQuery);
   const [selectedVariant, setSelectedVariant] = useState<string>('all');
   const [selectedRarity, setSelectedRarity] = useState<string>('all');
   const [masteredFilter, setMasteredFilter] = useState<MasteredFilter>('all');
@@ -140,6 +141,7 @@ export default function App() {
         iconUrl: item.iconUrl,
         spriteA: item,
         isModifiedA: item.status !== origStatus,
+        searchString: `${item.name} ${item.parent} ${item.variant} ${item.rarity}`.toLowerCase(),
       });
     });
 
@@ -155,6 +157,7 @@ export default function App() {
         if (!existing.iconUrl && item.iconUrl) existing.iconUrl = item.iconUrl;
         if (!existing.name && item.name) existing.name = item.name;
         if (!existing.dropChance && item.dropChance) existing.dropChance = item.dropChance;
+        existing.searchString = `${existing.name} ${existing.parent} ${existing.variant} ${existing.rarity}`.toLowerCase();
       } else {
         map.set(item.id, {
           id: item.id,
@@ -167,6 +170,7 @@ export default function App() {
           spriteB: item,
           isModifiedA: false,
           isModifiedB: isModB,
+          searchString: `${item.name} ${item.parent} ${item.variant} ${item.rarity}`.toLowerCase(),
         });
       }
     });
@@ -424,17 +428,12 @@ export default function App() {
     }
   }, [activeMode, missingForA, missingForB, bothMissing, masteryDiff, allMergedSprites]);
 
-  // Filtered Items
   const filteredItems = useMemo(() => {
     return currentModeItems.filter((item) => {
       // Search
-      if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase();
-        const matchesName = item.name.toLowerCase().includes(q);
-        const matchesParent = item.parent.toLowerCase().includes(q);
-        const matchesVariant = item.variant.toLowerCase().includes(q);
-        const matchesRarity = item.rarity.toLowerCase().includes(q);
-        if (!matchesName && !matchesParent && !matchesVariant && !matchesRarity) {
+      if (deferredSearchQuery.trim()) {
+        const q = deferredSearchQuery.toLowerCase();
+        if (item.searchString && !item.searchString.includes(q)) {
           return false;
         }
       }
@@ -462,7 +461,7 @@ export default function App() {
 
       return true;
     });
-  }, [currentModeItems, searchQuery, selectedVariant, selectedRarity, masteredFilter]);
+  }, [currentModeItems, deferredSearchQuery, selectedVariant, selectedRarity, masteredFilter]);
 
   // Swap users
   const handleSwapUsers = () => {
