@@ -1,0 +1,8 @@
+{
+  "name": "Fortnite Sprite Trader",
+  "description": "Compare Fortnite.gg sprite collections between two players to find missing sprites, trade opportunities, and mastery differences.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
