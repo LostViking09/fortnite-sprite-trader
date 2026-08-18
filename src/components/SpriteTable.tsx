@@ -90,8 +90,12 @@ export const SpriteTable: React.FC<SpriteTableProps> = ({
             onClick={() => onChangeStatus && onChangeStatus(spriteId, player, 'owned')}
             className={`flex h-7 w-7 items-center justify-center rounded-lg transition-all ${
               status === 'owned'
-                ? 'bg-blue-600/25 text-blue-300 border border-blue-500/60 shadow-sm shadow-blue-950 ring-1 ring-blue-500/30'
-                : 'text-zinc-500 hover:text-blue-300 hover:bg-zinc-900'
+                ? player === 'A'
+                  ? 'bg-cyan-500/25 text-cyan-300 border border-cyan-500/60 shadow-sm shadow-cyan-950 ring-1 ring-cyan-500/30'
+                  : 'bg-rose-500/25 text-rose-300 border border-rose-500/60 shadow-sm shadow-rose-950 ring-1 ring-rose-500/30'
+                : player === 'A'
+                ? 'text-zinc-500 hover:text-cyan-300 hover:bg-zinc-900'
+                : 'text-zinc-500 hover:text-rose-300 hover:bg-zinc-900'
             }`}
             title={`${playerName}: Owned (Level 1)`}
           >

@@ -35,9 +35,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               <h1 className="text-lg font-black tracking-wider text-white uppercase sm:text-xl">
                 Fortnite <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-pink-400 to-purple-400">Sprite Trader</span>
               </h1>
-              <span className="hidden rounded bg-purple-500/20 px-1.5 py-0.5 text-[10px] font-bold text-purple-300 sm:inline-block border border-purple-500/30">
-                fortnite.gg
-              </span>
             </div>
             <p className="text-xs text-zinc-400">Compare collections & organize mutual trades</p>
           </div>

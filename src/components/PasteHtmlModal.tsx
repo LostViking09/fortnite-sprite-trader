@@ -136,11 +136,11 @@ export const PasteHtmlModal: React.FC<PasteHtmlModalProps> = ({
                 onClick={() => setTargetSlot('A')}
                 className={`flex items-center justify-center gap-2 rounded-xl border p-2.5 text-xs font-bold transition-all ${
                   targetSlot === 'A'
-                    ? 'border-rose-500 bg-rose-500/20 text-rose-300 shadow-md shadow-rose-950/40'
+                    ? 'border-cyan-500 bg-cyan-500/20 text-cyan-300 shadow-md shadow-cyan-950/40'
                     : 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
                 }`}
               >
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-white text-[11px] font-black">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500 text-black text-[11px] font-black">
                   A
                 </span>
                 <span>Player A</span>
@@ -151,11 +151,11 @@ export const PasteHtmlModal: React.FC<PasteHtmlModalProps> = ({
                 onClick={() => setTargetSlot('B')}
                 className={`flex items-center justify-center gap-2 rounded-xl border p-2.5 text-xs font-bold transition-all ${
                   targetSlot === 'B'
-                    ? 'border-cyan-500 bg-cyan-500/20 text-cyan-300 shadow-md shadow-cyan-950/40'
+                    ? 'border-rose-500 bg-rose-500/20 text-rose-300 shadow-md shadow-rose-950/40'
                     : 'border-zinc-800 bg-zinc-900/60 text-zinc-400 hover:border-zinc-700 hover:text-zinc-200'
                 }`}
               >
-                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500 text-black text-[11px] font-black">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-white text-[11px] font-black">
                   B
                 </span>
                 <span>Player B</span>
