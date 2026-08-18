@@ -4,6 +4,12 @@
   --fngg-yellow: #fed83d;
 }
 
+html,
+body {
+  background-color: #09090b; /* Match zinc-950 */
+}
+
+
 @keyframes sprite-rarity-special-anim {
   0% {
     background-position: 0 0;
