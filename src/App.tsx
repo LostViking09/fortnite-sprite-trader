@@ -315,6 +315,18 @@ export default function App() {
     }
   };
 
+  // Stable reference for onChangeStatus to prevent breaking React.memo child components
+  const handleChangeStatusRef = useRef(handleChangeStatus);
+  useEffect(() => {
+    handleChangeStatusRef.current = handleChangeStatus;
+  });
+  const stableOnChangeStatus = React.useCallback(
+    (spriteId: string, player: 'A' | 'B', newStatus: OwnershipStatus) => {
+      handleChangeStatusRef.current(spriteId, player, newStatus);
+    },
+    []
+  );
+
   // Revert a single modified sprite
   const handleRevertItem = (spriteId: string, player: 'A' | 'B') => {
     if (player === 'A' && originalProfileA) {
@@ -572,14 +584,14 @@ export default function App() {
                 items={filteredItems}
                 usernameA={profileA.username}
                 usernameB={profileB.username}
-                onChangeStatus={handleChangeStatus}
+                onChangeStatus={stableOnChangeStatus}
               />
             ) : (
               <SpriteTable
                 items={filteredItems}
                 usernameA={profileA.username}
                 usernameB={profileB.username}
-                onChangeStatus={handleChangeStatus}
+                onChangeStatus={stableOnChangeStatus}
               />
             )}
           </>

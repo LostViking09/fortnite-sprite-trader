@@ -20,7 +20,7 @@ interface SpriteCardProps {
   onChangeStatus?: (spriteId: string, player: 'A' | 'B', newStatus: OwnershipStatus) => void;
 }
 
-export const SpriteCard: React.FC<SpriteCardProps> = ({
+export const SpriteCard: React.FC<SpriteCardProps> = React.memo(({
   id,
   spriteA,
   spriteB,
@@ -302,4 +302,14 @@ export const SpriteCard: React.FC<SpriteCardProps> = ({
       </div>
     </div>
   );
-};
+}, (prevProps, nextProps) => {
+  return (
+    prevProps.id === nextProps.id &&
+    prevProps.spriteA?.status === nextProps.spriteA?.status &&
+    prevProps.spriteB?.status === nextProps.spriteB?.status &&
+    prevProps.isModifiedA === nextProps.isModifiedA &&
+    prevProps.isModifiedB === nextProps.isModifiedB &&
+    prevProps.usernameA === nextProps.usernameA &&
+    prevProps.usernameB === nextProps.usernameB
+  );
+});
